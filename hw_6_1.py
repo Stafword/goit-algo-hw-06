@@ -39,8 +39,13 @@ class Record:
     def edit_phone(self, old_phone, new_phone):
         for ph in self.phones:
             if ph.value == old_phone:
-                ph.value == new_phone
+                if not new_phone.isdigit() or len(new_phone) != 10:
+                    raise ValueError("Новий номер має складатися з 10 цифер.")
+                ph.value = new_phone
+                found = True
                 break
+        if not found:
+            raise ValueError("Вказаний номер телефону не існує.")
 
     def find_phone(self, phone):
         for ph in self.phones:
